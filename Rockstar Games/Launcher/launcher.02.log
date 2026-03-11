@@ -1,0 +1,34 @@
+[2026-02-11 15:19:31.705] [DISPLAY] [Main ] [fileutils] Checking version: C:\Program Files\Rockstar Games\Launcher\Launcher.exe
+[2026-02-11 15:19:31.717] [DISPLAY] [Main ] [dx12] Retrieving D3D12 graphics info
+[2026-02-11 15:19:32.231] [DISPLAY] [Main ] [launcher] Opening log file.
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startupinfo] Command line: "C:\Program Files\Rockstar Games\Launcher\Launcher.exe" -skipPatcherCheck -EpicPortal -epiclocale=en -epicsandboxid=b0cd075465c44f87be3b505ac04a2e46 -rlrosdomainenv=prod @args.txt -user_restart -relaunchFromEpic=8769e24080ea413b8ebca3f1b8c50951
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startupinfo] P4 Version: 
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startupinfo] RGL Branch: release_05
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startupinfo] Version:    1.0.105.2733
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startupinfo] Session ID: e176dc01-a278-11db-95ce-056efc1302ab
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startupinfo] Name Hash:  DCCF306D
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startupinfo] Parameters:
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startupinfo]     C:\Program Files\Rockstar Games\Launcher\Launcher.exe
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startupinfo]     -skipPatcherCheck
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startupinfo]     -EpicPortal
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startupinfo]     -epiclocale=en
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startupinfo]     -epicsandboxid=b0cd075465c44f87be3b505ac04a2e46
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startupinfo]     -rlrosdomainenv=prod
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startupinfo]     @args.txt
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startupinfo]     -user_restart
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startupinfo]     -relaunchFromEpic=8769e24080ea413b8ebca3f1b8c50951
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startup] Initial Working Directory: C:\Program Files\Rockstar Games\Launcher
+[2026-02-11 15:19:32.240] [DISPLAY] [Main ] [startup] Working directory: C:\Program Files\Rockstar Games\Launcher
+[2026-02-11 15:19:32.244] [DISPLAY] [Main ] [packfile] Initialize 'Launcher.rpf' - succeeded
+[2026-02-11 15:19:32.245] [DISPLAY] [Main ] [localisation] Language updated to: 0
+[2026-02-11 15:19:32.322] [DISPLAY] [Main ] [external] Creating epic min mode launch
+[2026-02-11 15:19:32.322] [DISPLAY] [Main ] [external] Epic App Id: 
+[2026-02-11 15:19:32.322] [DISPLAY] [Main ] [external] Epic Location: C:\Program Files\Epic Games\GTAVEnhanced
+[2026-02-11 15:19:32.322] [DISPLAY] [Main ] [external] Epic Relaunch: true
+[2026-02-11 15:19:32.333] [ ERROR ] [Main ] [shell] Could not do OpenProcess on parent process.
+[2026-02-11 15:19:32.333] [DISPLAY] [Main ] [external] Unable to query parent process
+[2026-02-11 15:19:32.333] [ ERROR ] [Main ] [metadatamanager] Unable to load metadata at C:\Program Files\Epic Games\GTAVEnhanced\title.rgl, error 3
+[2026-02-11 15:19:32.334] [DISPLAY] [Main ] [metadatamanager] Couldn't load internal Epic metadata: 
+[2026-02-11 15:19:32.334] [DISPLAY] [Main ] [startup] Relaunch from third party platform required
+[2026-02-11 15:19:32.334] [DISPLAY] [Main ] [launcher] Launching epic title: 8769e24080ea413b8ebca3f1b8c50951
+[2026-02-11 15:19:32.794] [DISPLAY] [Main ] [startup] Shutting down to request third-party min-mode launch

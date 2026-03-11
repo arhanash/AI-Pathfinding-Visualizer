@@ -1,0 +1,217 @@
+[2026-02-11 14:59:56.372] [DISPLAY] [Main ] [fileutils] Checking version: C:\Program Files\Rockstar Games\Launcher\Launcher.exe
+[2026-02-11 14:59:56.387] [DISPLAY] [Main ] [dx12] Retrieving D3D12 graphics info
+[2026-02-11 14:59:57.554] [DISPLAY] [Main ] [launcher] Opening log file.
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo] Command line: "C:\Program Files\Rockstar Games\Launcher\Launcher.exe" -skipPatcherCheck -epicAppId=gta5_gen9  -AUTH_LOGIN=unused -AUTH_PASSWORD=433511f759074f07918efc9af2cda22b -AUTH_TYPE=exchangecode -epicapp=8769e24080ea413b8ebca3f1b8c50951 -epicenv=Prod -EpicPortal -epicusername="inimitable_499" -epicuserid=3e9d95babb60483998fa20941396964d -epiclocale=en -epicsandboxid=b0cd075465c44f87be3b505ac04a2e46 -rlrosdomainenv=prod @args.txt
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo] P4 Version: 
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo] RGL Branch: release_05
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo] Version:    1.0.105.2733
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo] Session ID: 80969c01-7d64-124a-8f8c-6528329b343a
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo] Name Hash:  DCCF306D
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo] Parameters:
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo]     C:\Program Files\Rockstar Games\Launcher\Launcher.exe
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo]     -skipPatcherCheck
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo]     -epicAppId=gta5_gen9
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo]     -AUTH_LOGIN=unused
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo]     -AUTH_PASSWORD=433511f759074f07918efc9af2cda22b
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo]     -AUTH_TYPE=exchangecode
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo]     -epicapp=8769e24080ea413b8ebca3f1b8c50951
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo]     -epicenv=Prod
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo]     -EpicPortal
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo]     -epicusername=inimitable_499
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo]     -epicuserid=3e9d95babb60483998fa20941396964d
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo]     -epiclocale=en
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo]     -epicsandboxid=b0cd075465c44f87be3b505ac04a2e46
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo]     -rlrosdomainenv=prod
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startupinfo]     @args.txt
+[2026-02-11 14:59:57.568] [DISPLAY] [Main ] [startup] Initial Working Directory: C:\Program Files\Epic Games\GTAVEnhanced
+[2026-02-11 14:59:57.569] [DISPLAY] [Main ] [startup] Working directory: C:\Program Files\Rockstar Games\Launcher
+[2026-02-11 14:59:57.588] [DISPLAY] [Main ] [packfile] Initialize 'Launcher.rpf' - succeeded
+[2026-02-11 14:59:57.588] [DISPLAY] [Main ] [localisation] Language updated to: 0
+[2026-02-11 14:59:57.697] [DISPLAY] [Main ] [external] Creating epic min mode launch
+[2026-02-11 14:59:57.697] [DISPLAY] [Main ] [external] Epic App Id: gta5_gen9
+[2026-02-11 14:59:57.697] [DISPLAY] [Main ] [external] Epic Location: C:\Program Files\Epic Games\GTAVEnhanced
+[2026-02-11 14:59:57.697] [DISPLAY] [Main ] [external] Epic Relaunch: false
+[2026-02-11 14:59:57.725] [DISPLAY] [Main ] [external] Running from Epic Games Launcher.
+[2026-02-11 14:59:57.728] [DISPLAY] [Main ] [metadatamanager] Read external Epic metadata: gta5_gen9
+[2026-02-11 14:59:57.728] [DISPLAY] [Main ] [environment] SetEnvironment: prod
+[2026-02-11 14:59:57.738] [DISPLAY] [Main ] [subsystem] Init phase 1
+[2026-02-11 14:59:57.739] [DISPLAY] [Main ] [fileutils] Checking version: C:\Program Files\Rockstar Games\Launcher\RockstarService.exe
+[2026-02-11 14:59:58.131] [DISPLAY] [Main ] [svc] Service version: 1.0.105.2733 (1.0.105.2733)
+[2026-02-11 14:59:58.131] [DISPLAY] [Main ] [svc] Starting service (attempt 1 / 3)...
+[2026-02-11 14:59:58.520] [DISPLAY] [Main ] [titlestorage] Installed titles:
+[2026-02-11 14:59:58.520] [DISPLAY] [Main ] [titlestorage]  Title                             Progress               Version              Location                                                    
+[2026-02-11 14:59:58.555] [DISPLAY] [Main ] [fileutils] Checking version: C:\Program Files\Rockstar Games\Social Club\socialclub.dll
+[2026-02-11 14:59:58.739] [DISPLAY] [Main ] [subsystem] Initializing group 0...
+[2026-02-11 14:59:58.739] [DISPLAY] [Main ] [subsystem] Init phase 2
+[2026-02-11 14:59:58.739] [DISPLAY] [Main ] [subsystem] Starting systems...
+[2026-02-11 14:59:58.739] [DISPLAY] [Main ] [minmode] Overriding language from external game launch: en-US
+[2026-02-11 14:59:58.739] [DISPLAY] [Main ] [localisation] Language updated to: 0
+[2026-02-11 14:59:58.740] [DISPLAY] [Main ] [subsystem] Starting diag...
+[2026-02-11 14:59:58.740] [DISPLAY] [Main ] [fileutils] Checking local versions...
+[2026-02-11 14:59:58.740] [DISPLAY] [Main ] [fileutils] Checking version: C:\Program Files\Rockstar Games\Social Club\socialclub.dll
+[2026-02-11 14:59:58.740] [DISPLAY] [Main ] [fileutils] Checking RGL version...
+[2026-02-11 14:59:58.740] [DISPLAY] [Main ] [fileutils] Version: 2.4.0.146 | 1.0.105.2733 | FFP
+[2026-02-11 14:59:58.740] [DISPLAY] [Main ] [subsystem] Starting net...
+[2026-02-11 14:59:58.761] [DISPLAY] [Main ] [subsystem] Assigning pools...
+[2026-02-11 14:59:58.761] [DISPLAY] [Main ] [subsystem] Initializing engine...
+[2026-02-11 14:59:58.762] [DISPLAY] [Main ] [subsystem] Initializing group 1...
+[2026-02-11 14:59:58.829] [DISPLAY] [Workr] [selfupdate] Up-to-date.
+[2026-02-11 14:59:58.993] [DISPLAY] [bgsvc] [svc] Received response from service.
+[2026-02-11 14:59:59.081] [DISPLAY] [Main ] [systemtray] System tray: enabled
+[2026-02-11 14:59:59.106] [DISPLAY] [Main ] [launcher] Passed check: majorVersion(10.0.26200) >= 10
+[2026-02-11 14:59:59.192] [DISPLAY] [http1] [idownloader] Starting download of 'https://gamedownloads-rockstargames-com.akamaized.net/public/launcher_online_config.xml'
+[2026-02-11 14:59:59.270] [DISPLAY] [http1] [idownloader] Completed download of 'https://gamedownloads-rockstargames-com.akamaized.net/public/launcher_online_config.xml' (status: 0/200)
+[2026-02-11 14:59:59.337] [DISPLAY] [Workr] [marketing_promo] No promotion manifest in memory, refreshing from cloud.
+[2026-02-11 14:59:59.337] [DISPLAY] [Workr] [marketing_promo] Requesting new manifest
+[2026-02-11 14:59:59.337] [DISPLAY] [Workr] [titlemanager] Downloading title list...
+[2026-02-11 14:59:59.337] [DISPLAY] [Workr] [titlemanager] Downloading default title list (SCS)...
+[2026-02-11 14:59:59.337] [DISPLAY] [Workr] [idownloader] Starting download of 'https://rgl-prod.ros.rockstargames.com/launcher/11/LauncherServices/App.asmx/GetDefaultApps?accessToken='
+[2026-02-11 14:59:59.924] [ ERROR ] [Workr] [idownloader] Download error for https://rgl-prod.ros.rockstargames.com/launcher/11/LauncherServices/App.asmx/GetDefaultApps?accessToken=
+[2026-02-11 14:59:59.924] [ ERROR ] [Workr] [idownloader] Error: The Rockstar update service is unavailable (code 234). If you continue to have problems playing the game, please contact Rockstar Games Customer Support at https://support.rockstargames.com.
+[2026-02-11 14:59:59.924] [ ERROR ] [Workr] [idownloader] Error code: 234 Result 400
+[2026-02-11 14:59:59.924] [ ERROR ] [Workr] [idownloader] Http info: abort:7, commit:1, http:400, alloc:0, recv:7, send:10, tcpe:-308, tcpr:-2)
+[2026-02-11 14:59:59.924] [DISPLAY] [Workr] [idownloader] Completed download of 'https://rgl-prod.ros.rockstargames.com/launcher/11/LauncherServices/App.asmx/GetDefaultApps?accessToken=' (status: 4/400)
+[2026-02-11 14:59:59.924] [DISPLAY] [Workr] [idownloader] Starting download of 'https://rgl-prod.ros.rockstargames.com/launcher/11/LauncherServices/App.asmx/GetDefaultApps?accessToken='
+[2026-02-11 15:00:00.505] [ ERROR ] [Workr] [idownloader] Download error for https://rgl-prod.ros.rockstargames.com/launcher/11/LauncherServices/App.asmx/GetDefaultApps?accessToken=
+[2026-02-11 15:00:00.505] [ ERROR ] [Workr] [idownloader] Error: The Rockstar update service is unavailable (code 234). If you continue to have problems playing the game, please contact Rockstar Games Customer Support at https://support.rockstargames.com.
+[2026-02-11 15:00:00.505] [ ERROR ] [Workr] [idownloader] Error code: 234 Result 400
+[2026-02-11 15:00:00.505] [ ERROR ] [Workr] [idownloader] Http info: abort:7, commit:1, http:400, alloc:0, recv:7, send:10, tcpe:-308, tcpr:-2)
+[2026-02-11 15:00:00.505] [DISPLAY] [Workr] [idownloader] Completed download of 'https://rgl-prod.ros.rockstargames.com/launcher/11/LauncherServices/App.asmx/GetDefaultApps?accessToken=' (status: 4/400)
+[2026-02-11 15:00:00.505] [DISPLAY] [Workr] [idownloader] Starting download of 'https://rgl-prod.ros.rockstargames.com/launcher/11/LauncherServices/App.asmx/GetDefaultApps?accessToken='
+[2026-02-11 15:00:01.078] [ ERROR ] [Workr] [idownloader] Download error for https://rgl-prod.ros.rockstargames.com/launcher/11/LauncherServices/App.asmx/GetDefaultApps?accessToken=
+[2026-02-11 15:00:01.078] [ ERROR ] [Workr] [idownloader] Error: The Rockstar update service is unavailable (code 234). If you continue to have problems playing the game, please contact Rockstar Games Customer Support at https://support.rockstargames.com.
+[2026-02-11 15:00:01.078] [ ERROR ] [Workr] [idownloader] Error code: 234 Result 400
+[2026-02-11 15:00:01.078] [ ERROR ] [Workr] [idownloader] Http info: abort:7, commit:1, http:400, alloc:0, recv:7, send:10, tcpe:-308, tcpr:-2)
+[2026-02-11 15:00:01.078] [DISPLAY] [Workr] [idownloader] Completed download of 'https://rgl-prod.ros.rockstargames.com/launcher/11/LauncherServices/App.asmx/GetDefaultApps?accessToken=' (status: 4/400)
+[2026-02-11 15:00:01.078] [ ERROR ] [Workr] [error] ************************************************************************
+[2026-02-11 15:00:01.078] [ ERROR ] [Workr] [error] * Setting error condition
+[2026-02-11 15:00:01.078] [ ERROR ] [Workr] [error] * Category:  2   (ERROR_CATEGORY_DOWNLOADER)
+[2026-02-11 15:00:01.078] [ ERROR ] [Workr] [error] * Code:      224 (DOWNLOADER_ERR_DOWNLOAD_XML_FAILED)
+[2026-02-11 15:00:01.078] [ ERROR ] [Workr] [error] * Extra:     https://rgl-prod.ros.rockstargames.com/launcher/11/LauncherServices/App.asmx/GetDefaultApps?accessToken=
+[2026-02-11 15:00:01.078] [ ERROR ] [Workr] [error] * Localised: The Rockstar update service is unavailable (code 224). If you continue to have problems playing the game, please contact Rockstar Games Customer Support at https://support.rockstargames.com.
+[2026-02-11 15:00:01.078] [ ERROR ] [Workr] [error] ************************************************************************
+[2026-02-11 15:00:01.078] [ ERROR ] [Workr] [xml] Unable to download XML from https://rgl-prod.ros.rockstargames.com/launcher/11/LauncherServices/App.asmx/GetDefaultApps?accessToken=!
+[2026-02-11 15:00:01.078] [WARNING] [Workr] [launcher] Unable to download default title list; can't check for updates.
+[2026-02-11 15:00:01.078] [DISPLAY] [Workr] [launcher] Completed Pre-initialization tasks
+[2026-02-11 15:00:01.081] [DISPLAY] [Main ] [subsystem] Init phase 3
+[2026-02-11 15:00:01.081] [DISPLAY] [Main ] [subsystem] RGL Offline Assets path: C:\Program Files\Rockstar Games\Launcher\offline.pak
+[2026-02-11 15:00:01.081] [DISPLAY] [Main ] [subsystem] Intializing connection manager.
+[2026-02-11 15:00:01.081] [DISPLAY] [Main ] [subsystem] Initializing RAGE networking.
+[2026-02-11 15:00:01.721] [DISPLAY] [Main ] [subsystem] Initializing group 2...
+[2026-02-11 15:00:01.918] [DISPLAY] [Workr] [dx12] Retrieving D3D12 graphics info
+[2026-02-11 15:00:02.380] [DISPLAY] [Workr] [sysinfo] System Configuration: 
+ CPU Info:
+  ID: AMD64 Family 25 Model 68 Stepping 1
+  Name: AMD Ryzen 7 7735HS with Radeon Graphics        
+  Clock Speed: 3.19 GHZ
+  Physical Cores: 8
+  Logical Cores: 16
+  SSE 4.1: enabled
+  SSE 4.2: enabled
+
+ Disk 0 (C:\)
+  Disk Type: NVMe
+  Bytes Free: 166869549056
+  Bytes Total: 510745636864
+
+Memory Info:
+ 17179869184 B
+ 16 GB
+
+ GPU 0
+  Description: NVIDIA GeForce RTX 4060 Laptop GPU
+  Capacity (Bytes): 8343519232
+  Display Capacity: 8.0 GB
+
+ GPU 1
+  Description: AMD Radeon(TM) Graphics
+  Capacity (Bytes): 506949632
+  Display Capacity: 0.5 GB
+[2026-02-11 15:00:02.386] [DISPLAY] [Workr] [idownloader] Starting download of 'https://gamedownloads-rockstargames-com.akamaized.net/public/marketing.json'
+[2026-02-11 15:00:02.606] [DISPLAY] [Workr] [idownloader] Completed download of 'https://gamedownloads-rockstargames-com.akamaized.net/public/marketing.json' (status: 0/200)
+[2026-02-11 15:00:02.789] [DISPLAY] [Workr] [fileutils] Could not enumerate files in folder 'C:\Users\ACER\AppData\Local\Rockstar Games\Launcher\IconCache', path not found.
+[2026-02-11 15:00:07.729] [DISPLAY] [Main ] [scuicallbacks] Received UI terminated event
+[2026-02-11 15:00:09.231] [DISPLAY] [Main ] [scuicallbacks] Received UI terminated event
+[2026-02-11 15:00:09.996] [DISPLAY] [Main ] [sysinfo] Identified device Type: 0
+[2026-02-11 15:00:10.114] [DISPLAY] [Main ] [launcher] Social Club UI has started.
+[2026-02-11 15:00:10.114] [DISPLAY] [Main ] [fileutils] Checking version: C:\Program Files\Rockstar Games\Social Club\socialclub.dll
+[2026-02-11 15:00:10.115] [DISPLAY] [Admin] [external] Setting up epic title: gta5_gen9
+[2026-02-11 15:00:10.297] [DISPLAY] [Main ] [fileutils] Checking version: C:\Program Files\Rockstar Games\Social Club\socialclub.dll
+[2026-02-11 15:00:10.335] [DISPLAY] [Main ] [launcher] Time to start up: 14030 ms
+[2026-02-11 15:00:10.342] [DISPLAY] [Main ] [systemtray] System tray: enabled
+[2026-02-11 15:00:10.440] [DISPLAY] [Main ] [ui_window_controller] UiWindowController::SetContext: Invalid -> MainWindow
+[2026-02-11 15:00:10.440] [DISPLAY] [Main ] [ui_window_controller] UiWindowController::SetState: Invalid -> WaitForBrowser
+[2026-02-11 15:00:10.440] [DISPLAY] [Main ] [ui_mainwindow] Using DPI 120,120
+[2026-02-11 15:00:10.440] [DISPLAY] [Main ] [ui_mainwindow] Using UI Scale: 1.25
+[2026-02-11 15:00:10.440] [DISPLAY] [Main ] [ui_mainwindow] Using saved geometry: 321,136 (1278 x 748)
+[2026-02-11 15:00:10.533] [DISPLAY] [Main ] [ui_window_controller] UiWindowController::SetState: WaitForBrowser -> WaitForWindow
+[2026-02-11 15:00:10.533] [DISPLAY] [Main ] [ui_window_controller] UiWindowController::SetState: WaitForWindow -> Active
+[2026-02-11 15:00:19.570] [ ERROR ] [Main ] [epic_auth] LoginCompleteCallback :: Login Failed - Error Code: EOS_NoConnection
+[2026-02-11 15:00:19.570] [DISPLAY] [Main ] [launcher] OnEpicEvent :: 1 received
+[2026-02-11 15:00:19.570] [ ERROR ] [Main ] [launcher] Epic sign in error. Error: 1, ErrorCode: 1
+[2026-02-11 15:00:19.631] [ ERROR ] [Admin] [external] Failed setting up external title
+[2026-02-11 15:00:19.631] [ ERROR ] [Admin] [error] ************************************************************************
+[2026-02-11 15:00:19.631] [ ERROR ] [Admin] [error] * Setting error condition
+[2026-02-11 15:00:19.631] [ ERROR ] [Admin] [error] * Category:  1   (ERROR_CATEGORY_LAUNCHER)
+[2026-02-11 15:00:19.631] [ ERROR ] [Admin] [error] * Code:      142 (0x8e)
+[2026-02-11 15:00:19.631] [ ERROR ] [Admin] [error] * Extra:     Grand Theft Auto V Enhanced
+[2026-02-11 15:00:19.631] [ ERROR ] [Admin] [error] * Localised: Grand Theft Auto V Enhanced was unable to authenticate with Epic Online Services.
+
+Please verify that the Epic Games Launcher is running and signed in and that the title is up to date.
+
+If you continue to have problems playing the game, please contact Rockstar Games Customer Support at https://support.rockstargames.com.
+[2026-02-11 15:00:19.631] [ ERROR ] [Admin] [error] ************************************************************************
+[2026-02-11 15:00:19.634] [ ERROR ] [Admin] [backtrace] [ 0] 00007FF69A5CDF23 (Launcher.exe)
+[2026-02-11 15:00:19.634] [ ERROR ] [Admin] [backtrace] [ 1] 00007FF69A5CDF9B (Launcher.exe)
+[2026-02-11 15:00:19.634] [ ERROR ] [Admin] [backtrace] [ 2] 00007FF69A3E5D13 (Launcher.exe)
+[2026-02-11 15:00:19.634] [ ERROR ] [Admin] [backtrace] [ 3] 00007FF69A52CC06 (Launcher.exe)
+[2026-02-11 15:00:19.634] [ ERROR ] [Admin] [backtrace] [ 4] 00007FF69A3E5D88 (Launcher.exe)
+[2026-02-11 15:00:19.634] [ ERROR ] [Admin] [backtrace] [ 5] 00007FF69A42F431 (Launcher.exe)
+[2026-02-11 15:00:19.634] [ ERROR ] [Admin] [backtrace] [ 6] 00007FF69A58D504 (Launcher.exe)
+[2026-02-11 15:00:19.634] [ ERROR ] [Admin] [backtrace] [ 7] 00007FF69A58D436 (Launcher.exe)
+[2026-02-11 15:00:19.634] [ ERROR ] [Admin] [backtrace] [ 8] 00007FF69A5CB733 (Launcher.exe)
+[2026-02-11 15:00:19.634] [ ERROR ] [Admin] [backtrace] [ 9] 00007FFF7627E8D7 (KERNEL32.DLL)
+[2026-02-11 15:00:19.634] [ ERROR ] [Admin] [backtrace] [10] 00007FFF7756C40C (ntdll.dll)
+[2026-02-11 15:00:19.634] [ ERROR ] [Admin] [backtrace] Hash: 0x5A5946E0
+[2026-02-11 15:00:19.634] [ ERROR ] [Admin] [backtrace] Base: 00007FF69A3B0000
+[2026-02-11 15:00:19.634] [DISPLAY] [Admin] [launcher] Closing log file to copy to C:\Users\ACER\AppData\Local\Rockstar Games\Launcher\CrashLogs\launcher.log
+[2026-02-11 15:00:19.634] [DISPLAY] [Admin] [launcher] Closing log file.
+[2026-02-11 15:00:19.971] [ ERROR ] [Admin] [launcher] Displaying error message: Grand Theft Auto V Enhanced was unable to authenticate with Epic Online Services.
+
+Please verify that the Epic Games Launcher is running and signed in and that the title is up to date.
+
+If you continue to have problems playing the game, please contact Rockstar Games Customer Support at https://support.rockstargames.com.
+[2026-02-11 15:00:24.772] [DISPLAY] [Main ] [launcher] Shutdown requested! Forced: true
+[2026-02-11 15:00:24.790] [DISPLAY] [Main ] [launcher] StartShutdown - Now in progress
+[2026-02-11 15:00:24.790] [DISPLAY] [Main ] [launcher] SHUTDOWN_REQUESTED -> SHUTDOWN_MAIN_WINDOW
+[2026-02-11 15:00:24.795] [DISPLAY] [Main ] [launcher] SHUTDOWN_MAIN_WINDOW -> SHUTDOWN_STARTUP_WINDOW
+[2026-02-11 15:00:24.795] [DISPLAY] [Main ] [launcher] SHUTDOWN_STARTUP_WINDOW -> SHUTDOWN_NOTIFICATION_MANAGER
+[2026-02-11 15:00:24.795] [DISPLAY] [Main ] [launcher] SHUTDOWN_NOTIFICATION_MANAGER -> SHUTDOWN_GAME_LAUNCHER
+[2026-02-11 15:00:24.795] [DISPLAY] [Main ] [launcher] SHUTDOWN_GAME_LAUNCHER -> SHUTDOWN_WINDOW_CONTROLLER
+[2026-02-11 15:00:24.904] [DISPLAY] [Main ] [launcher] SHUTDOWN_WINDOW_CONTROLLER -> SHUTDOWN_STOP_WORKER_THREADS
+[2026-02-11 15:00:24.904] [DISPLAY] [Main ] [launcher] SHUTDOWN_STOP_WORKER_THREADS -> SHUTDOWN_TITLES
+[2026-02-11 15:00:24.904] [DISPLAY] [Main ] [launcher] SHUTDOWN_TITLES -> SHUTDOWN_DISK
+[2026-02-11 15:00:24.904] [DISPLAY] [Main ] [launcher] SHUTDOWN_DISK -> SHUTDOWN_BACKGROUND_SERVICE
+[2026-02-11 15:00:24.904] [DISPLAY] [Main ] [launcher] SHUTDOWN_BACKGROUND_SERVICE -> SHUTDOWN_TELEMETRY
+[2026-02-11 15:00:24.904] [DISPLAY] [Main ] [launcher] SHUTDOWN_TELEMETRY -> SHUTDOWN_CACHED_REQUEST_MANAGER
+[2026-02-11 15:00:24.904] [DISPLAY] [Main ] [launcher] SHUTDOWN_CACHED_REQUEST_MANAGER -> SHUTDOWN_SETTINGS_MANAGER
+[2026-02-11 15:00:24.904] [DISPLAY] [Main ] [launcher] SHUTDOWN_SETTINGS_MANAGER -> SHUTDOWN_SDK
+[2026-02-11 15:00:24.904] [DISPLAY] [Main ] [launcher] SHUTDOWN_SDK -> SHUTDOWN_PRESENCE
+[2026-02-11 15:00:24.904] [DISPLAY] [Main ] [launcher] SHUTDOWN_PRESENCE -> SHUTDOWN_SUBSYSTEMS
+[2026-02-11 15:00:24.904] [DISPLAY] [Main ] [launcher] SHUTDOWN_SUBSYSTEMS -> SHUTDOWN_IN_PROGRESS
+[2026-02-11 15:00:27.439] [DISPLAY] [Main ] [launcher] Telemetry flushed
+[2026-02-11 15:00:27.441] [DISPLAY] [Main ] [launcher] Window destroyed
+[2026-02-11 15:00:27.441] [DISPLAY] [Main ] [launcher] SDK ready for shutdown
+[2026-02-11 15:00:27.441] [DISPLAY] [Main ] [launcher] Notifications cleared
+[2026-02-11 15:00:27.441] [DISPLAY] [Main ] [launcher] No games running
+[2026-02-11 15:00:27.441] [DISPLAY] [Main ] [launcher] Worker Threads shutdown
+[2026-02-11 15:00:27.441] [DISPLAY] [Main ] [launcher] Title state flushed
+[2026-02-11 15:00:27.441] [DISPLAY] [Main ] [launcher] Disk state flushed
+[2026-02-11 15:00:27.441] [DISPLAY] [Main ] [launcher] Cached Requests cleared
+[2026-02-11 15:00:27.441] [DISPLAY] [Main ] [launcher] Settings saved
+[2026-02-11 15:00:27.441] [DISPLAY] [Main ] [launcher] Presence signed out
+[2026-02-11 15:00:27.441] [DISPLAY] [Main ] [launcher] All subsystems have shut down
+[2026-02-11 15:00:27.441] [DISPLAY] [Main ] [launcher] SHUTDOWN_IN_PROGRESS -> SHUTDOWN_COMPLETE
+[2026-02-11 15:00:27.441] [DISPLAY] [Main ] [app] Application quit requested (exit code: 0)
+[2026-02-11 15:00:27.441] [DISPLAY] [Main ] [launcher] SHUTDOWN_COMPLETE -> SHUTDOWN_EXITING
+[2026-02-11 15:00:27.479] [DISPLAY] [Main ] [svc] Stopping the background service.
