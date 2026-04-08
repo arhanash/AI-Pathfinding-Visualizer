@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Traffic Insights</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --bg-color: #f0f4f8;
+            --card-bg: #ffffff;
+            --text-main: #1f2937;
+            --text-muted: #6b7280;
+            --primary: #16a34a;
+            --primary-light: #dcfce7;
+            --secondary: #2563eb;
+            --secondary-light: #dbeafe;
+            --danger: #ef4444;
+            --danger-light: #fee2e2;
+            --warning: #f59e0b;
+            --warning-light: #fef3c7;
+            --border: #e5e7eb;
+            --header-bg: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        body.dark-mode {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --header-bg: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .nav-logo-text {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .nav-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            color: var(--text-main);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .btn:hover {
+            background: var(--border);
+        }
+        .btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .btn-icon {
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .page.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+        .card-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Dashboard specific */
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+        .btn-toggle {
+            background: var(--primary-light);
+            color: var(--primary);
+            border-color: var(--primary-light);
+        }
+        .btn-toggle.off {
+            background: var(--danger-light);
+            color: var(--danger);
+        }
+
+        /* Section 1 controls */
+        .controls-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 1.5rem;
+            text-align: center;
+        }
+        .control-col {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            justify-content: center;
+        }
+        .btn-pause {
+            background: var(--secondary-light);
+            color: var(--secondary);
+            border: none;
+            width: 100%;
+            padding: 0.75rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .speed-group {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+        }
+        .speed-group .btn {
+            flex: 1;
+        }
+        .control-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* Layout Grid */
+        .two-col {
+            display: grid;
+            grid-template-columns: 65% 35%;
+            gap: 1.5rem;
+        }
+        @media (max-width: 1024px) {
+            .two-col { grid-template-columns: 1fr; }
+        }
+
+        /* Intersection Overview */
+        .intersection-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            gap: 10px;
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 12px;
+            position: relative;
+            margin-top: 1rem;
+            overflow: hidden;
+            min-height: 480px;
+        }
+        .road-panel {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 10px;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .road-north { grid-column: 2; grid-row: 1; }
+        .road-west { grid-column: 1; grid-row: 2; }
+        .center-node { 
+            grid-column: 2; grid-row: 2; 
+            background: #334155; 
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; color: #cbd5e1; border: 4px dashed #64748b;
+        }
+        .road-east { grid-column: 3; grid-row: 2; }
+        .road-south { grid-column: 2; grid-row: 3; }
+
+        .road-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+        }
+        .badge {
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .badge-green { background: var(--primary-light); color: var(--primary); }
+        .badge-red { background: var(--danger-light); color: var(--danger); }
+        .badge-yellow { background: var(--warning-light); color: var(--warning); }
+        
+        .camera-view {
+            height: 60px;
+            background: #000;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .car {
+            position: absolute;
+            border-radius: 2px;
+            transition: top 0.1s linear, left 0.1s linear;
+        }
+        .car.ns { width: 12px; height: 20px; }
+        .car.ew { width: 20px; height: 12px; }
+
+        .traffic-light {
+            display: flex; margin: 4px 0; gap: 4px; background: #222; padding: 4px; border-radius: 14px; width: fit-content; align-items: center; justify-content: center;
+        }
+        .light { width: 14px; height: 14px; border-radius: 50%; background: #444; opacity: 0.3;}
+        .light.r.active { background: #ef4444; opacity: 1; box-shadow: 0 0 10px #ef4444;}
+        .light.y.active { background: #f59e0b; opacity: 1; box-shadow: 0 0 10px #f59e0b;}
+        .light.g.active { background: #10b981; opacity: 1; box-shadow: 0 0 10px #10b981;}
+
+        .stats-mini {
+            font-size: 0.75rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            color: #94a3b8;
+        }
+        
+        .queue-bar-bg {
+            width: 100%; height: 6px; background: #334155; border-radius: 3px; margin-top: 6px; overflow: hidden;
+        }
+        .queue-bar { height: 100%; width: 20%; background: var(--primary); transition: width 0.5s ease, background 0.5s ease; }
+
+        .emergency-banner {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            padding: 8px;
+            font-size: 0.9rem;
+            z-index: 10;
+            display: none;
+            animation: pulse 1s infinite alternate;
+        }
+        @keyframes pulse { from { opacity: 0.8; } to { opacity: 1; } }
+
+        /* Emergency Override */
+        .emergency-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1rem;}
+        .emerg-card {
+            border: 2px solid var(--border);
+            border-radius: 8px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.2s;
+            font-size: 0.85rem; font-weight: 600;
+        }
+        .emerg-card:hover { border-color: var(--warning); background: var(--warning-light); color: var(--warning); }
+        .emerg-card.selected { border-color: var(--danger); background: var(--danger-light); color: var(--danger); }
+        
+        .emerg-types { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 1rem;}
+        .btn-activate-emerg {
+            width: 100%; background: var(--danger); color: white; padding: 1rem; font-size: 1.1rem; font-weight: bold; margin-bottom: 1rem; border: none; border-radius: 8px; cursor: pointer; transition: var(--transition);
+        }
+        .btn-activate-emerg:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-activate-emerg:not(:disabled):hover { filter: brightness(1.1); }
+        .info-box {
+            background: var(--bg-color); border-radius: 8px; padding: 12px; font-size: 0.8rem; border: 1px solid var(--border);
+        }
+        .info-box ul { margin-left: 20px; margin-top: 8px; color: var(--text-muted); }
+
+        /* Stats Strip */
+        .stats-strip {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+        }
+        .stat-card {
+            background: var(--card-bg); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--border);
+            display: flex; flex-direction: column; gap: 8px;
+        }
+        .stat-value { font-size: 2rem; font-weight: 800; color: var(--text-main); }
+        .stat-label { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; display: flex; align-items: center; gap: 6px; }
+
+        /* Analytics Page Specific */
+        .analytics-content { margin-top: 1rem; }
+        .chart-container { height: 300px; width: 100%; margin-top: 1rem; }
+        .summary-row {
+            display: flex; justify-content: space-around; padding-top: 1rem; margin-top: 1rem; border-top: 1px solid var(--border);
+        }
+        .sum-item { text-align: center; }
+        .sum-val { font-size: 1.25rem; font-weight: bold; }
+        .sum-lbl { font-size: 0.75rem; color: var(--text-muted); }
+
+        .export-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 1rem; }
+        .checklist { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1rem; font-size: 0.85rem;}
+        .check-item { display: flex; align-items: center; gap: 8px; }
+
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid var(--border); }
+        th { color: var(--text-muted); font-weight: 600; }
+        
+        .rec-card { border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-top: 12px; }
+        .rec-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-weight: 600; font-size: 0.9rem;}
+        .rec-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 8px; }
+        .rec-result { font-size: 0.85rem; color: var(--primary); font-weight: 600; margin-bottom: 10px; }
+
+        .footer { text-align: center; padding: 2rem; color: var(--text-muted); font-size: 0.85rem; }
+
+        /* Utility */
+        .text-green { color: var(--primary); }
+        .text-blue { color: var(--secondary); }
+        .text-red { color: var(--danger); }
+        .text-warning { color: var(--warning); }
+        .text-white { color: white; }
+        .w-full { width: 100%; }
+        .font-bold { font-weight: bold; }
+        .flex-between { display: flex; justify-content: space-between; align-items: center; }
+        .mt-4 { margin-top: 1rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .text-center { text-align: center; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+            <div class="nav-logo-text">
+                <span style="font-size: 1.5rem;">⚙</span> Smart Traffic Insights
+            </div>
+            <div class="nav-subtitle">AI-Powered Traffic Management Platform</div>
+        </div>
+        <div class="nav-right">
+            <button class="btn active" onclick="switchPage('dashboard')" id="btn-nav-dash">Dashboard</button>
+            <button class="btn" onclick="switchPage('analytics')" id="btn-nav-ana">Analytics</button>
+            <button class="btn btn-icon" onclick="toggleTheme()" id="btn-theme">🌙</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        
+        <!-- PAGE 1: DASHBOARD -->
+        <div id="page-dashboard" class="page active">
+            <div class="header-row">
+                <div>
+                    <h1 style="font-size: 1.5rem;">Smart Traffic Simulator</h1>
+                    <p class="card-subtitle">Real-time adaptive intersection control</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-toggle" id="btn-ai-toggle" onclick="toggleAI()">🎥 AI Detection ON</button>
+                    <button class="btn" onclick="alert('Data exported!')">⬇ Export Data</button>
+                    <button class="btn btn-icon">⚙</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="controls-grid">
+                    <div class="control-col">
+                        <span class="control-label">Simulation State</span>
+                        <button class="btn btn-pause" id="btn-pause" onclick="togglePause()">Pause ⏸</button>
+                        <span class="control-label" id="status-label" style="color: var(--primary);">Running</span>
+                    </div>
+                    <div class="control-col">
+                        <span class="control-label">Simulation Speed</span>
+                        <div class="speed-group">
+                            <button class="btn" onclick="setSpeed(0.5, this)">0.5x</button>
+                            <button class="btn active" onclick="setSpeed(1, this)">1x</button>
+                            <button class="btn" onclick="setSpeed(2, this)">2x</button>
+                            <button class="btn" onclick="setSpeed(4, this)">4x</button>
+                        </div>
+                        <span class="control-label" id="speed-label">Speed: 1x</span>
+                    </div>
+                    <div class="control-col">
+                        <span class="control-label">Reset Simulation</span>
+                        <button class="btn" onclick="resetSim()" style="border-color: var(--danger); color: var(--danger);">↺ Reset All</button>
+                        <span class="control-label" id="cycles-label">Cycles: 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two-col">
+                <!-- Left Col -->
+                <div class="card" style="padding: 1rem;">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Intersection Overview</div>
+                            <div class="card-subtitle">Real-time traffic light status</div>
+                        </div>
+                        <span class="badge badge-green">● Active</span>
+                    </div>
+
+                    <div class="intersection-wrapper" id="intersection-map">
+                        <div class="emergency-banner" id="em-banner">🚨 EMERGENCY OVERRIDE ACTIVE 🚨</div>
+                        
+                        <!-- Center Node -->
+                        <div class="center-node">Intersection</div>
+
+                        <!-- North -->
+                        <div class="road-panel road-north" id="road-A">
+                            <div class="road-header">
+                                <span><span style="color:#60a5fa">●</span> Road A (North)</span>
+                                <span class="badge badge-red" id="badge-A">RED</span>
+                            </div>
+                            <div style="font-size: 0.65rem; margin-bottom: 2px;">🎥 AI Camera - <span class="text-green">⚡ LIVE</span></div>
+                            <div class="camera-view" id="cam-A"></div>
+                            <div class="flex-between">
+                                <div class="traffic-light">
+                                    <div class="light r active" id="light-A-r"></div>
+                                    <div class="light y" id="light-A-y"></div>
+                                    <div class="light g" id="light-A-g"></div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div class="stats-mini">
+                                        <span>Vehicles: <span id="veh-A" class="text-white font-bold">0</span></span>
+                                        <span>Queue: <span id="q-A" class="text-white font-bold">0</span></span>
+                                    </div>
+                                    <div style="font-size: 0.65rem; color:#94a3b8; margin-top: 4px;">⚡ <span id="spd-A">45.0</span> km/h | 🗲 YOLOv8</div>
+                                </div>
+                            </div>
+                            <div class="queue-bar-bg"><div class="queue-bar" id="qbar-A" style="background:var(--danger)"></div></div>
+                        </div>
+
+                        <!-- East -->
+                        <div class="road-panel road-east" id="road-B">
+                            <div class="road-header">
+                                <span><span style="color:#facc15">●</span> Road B (East)</span>
+                                <span class="badge badge-red" id="badge-B">RED</span>
+                            </div>
+                            <div style="font-size: 0.65rem; margin-bottom: 2px;">🎥 AI Camera - <span class="text-green">⚡ LIVE</span></div>
+                            <div class="camera-view" id="cam-B"></div>
+                            <div class="flex-between">
+                                <div class="traffic-light">
+                                    <div class="light r active" id="light-B-r"></div>
+                                    <div class="light y" id="light-B-y"></div>
+                                    <div class="light g" id="light-B-g"></div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div class="stats-mini">
+                                        <span>Vehicles: <span id="veh-B" class="text-white font-bold">0</span></span>
+                                        <span>Queue: <span id="q-B" class="text-white font-bold">0</span></span>
+                                    </div>
+                                    <div style="font-size: 0.65rem; color:#94a3b8; margin-top: 4px;">⚡ <span id="spd-B">45.0</span> km/h | 🗲 YOLOv8</div>
+                                </div>
+                            </div>
+                            <div class="queue-bar-bg"><div class="queue-bar" id="qbar-B"></div></div>
+                        </div>
+
+                        <!-- South -->
+                        <div class="road-panel road-south" id="road-C">
+                            <div class="road-header">
+                                <span><span style="color:#f87171">●</span> Road C (South)</span>
+                                <span class="badge badge-red" id="badge-C">RED</span>
+                            </div>
+                            <div style="font-size: 0.65rem; margin-bottom: 2px;">🎥 AI Camera - <span class="text-green">⚡ LIVE</span></div>
+                            <div class="camera-view" id="cam-C"></div>
+                            <div class="flex-between">
+                                <div class="traffic-light">
+                                    <div class="light r active" id="light-C-r"></div>
+                                    <div class="light y" id="light-C-y"></div>
+                                    <div class="light g" id="light-C-g"></div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div class="stats-mini">
+                                        <span>Vehicles: <span id="veh-C" class="text-white font-bold">0</span></span>
+                                        <span>Queue: <span id="q-C" class="text-white font-bold">0</span></span>
+                                    </div>
+                                    <div style="font-size: 0.65rem; color:#94a3b8; margin-top: 4px;">⚡ <span id="spd-C">45.0</span> km/h | 🗲 YOLOv8</div>
+                                </div>
+                            </div>
+                            <div class="queue-bar-bg"><div class="queue-bar" id="qbar-C"></div></div>
+                        </div>
+
+                        <!-- West -->
+                        <div class="road-panel road-west" id="road-D">
+                            <div class="road-header">
+                                <span><span style="color:#c084fc">●</span> Road D (West)</span>
+                                <span class="badge badge-red" id="badge-D">RED</span>
+                            </div>
+                            <div style="font-size: 0.65rem; margin-bottom: 2px;">🎥 AI Camera - <span class="text-green">⚡ LIVE</span></div>
+                            <div class="camera-view" id="cam-D"></div>
+                            <div class="flex-between">
+                                <div class="traffic-light">
+                                    <div class="light r active" id="light-D-r"></div>
+                                    <div class="light y" id="light-D-y"></div>
+                                    <div class="light g" id="light-D-g"></div>
+                                </div>
+                                <div style="text-align: right;">
+                                    <div class="stats-mini">
+                                        <span>Vehicles: <span id="veh-D" class="text-white font-bold">0</span></span>
+                                        <span>Queue: <span id="q-D" class="text-white font-bold">0</span></span>
+                                    </div>
+                                    <div style="font-size: 0.65rem; color:#94a3b8; margin-top: 4px;">⚡ <span id="spd-D">45.0</span> km/h | 🗲 YOLOv8</div>
+                                </div>
+                            </div>
+                            <div class="queue-bar-bg"><div class="queue-bar" id="qbar-D"></div></div>
+                        </div>
+
+                    </div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 10px;" id="last-updated">
+                        ● Stop ● Caution ● Go | Last updated: --:--:--
+                    </div>
+                </div>
+
+                <!-- Right Col -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title text-red" style="display:flex; align-items:center; gap:8px;">
+                                <span style="font-size: 1.25rem;">⚠</span> Emergency Override
+                            </div>
+                            <div class="card-subtitle">Priority vehicle signal control</div>
+                        </div>
+                    </div>
+
+                    <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Select Emergency Road:</div>
+                    <div class="emergency-grid" id="em-roads">
+                        <div class="emerg-card" onclick="selectEmRoad('A')">↑ Road A (North)</div>
+                        <div class="emerg-card" onclick="selectEmRoad('B')">→ Road B (East)</div>
+                        <div class="emerg-card" onclick="selectEmRoad('C')">↓ Road C (South)</div>
+                        <div class="emerg-card" onclick="selectEmRoad('D')">← Road D (West)</div>
+                    </div>
+
+                    <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Emergency Vehicle Type:</div>
+                    <div class="emerg-types" id="em-types">
+                        <div class="emerg-card" onclick="selectEmType('amb')">🚑 Ambulance</div>
+                        <div class="emerg-card" onclick="selectEmType('fire')">🚒 Fire Truck</div>
+                        <div class="emerg-card" onclick="selectEmType('pol')">🛡 Police</div>
+                    </div>
+
+                    <button class="btn-activate-emerg" id="btn-em-trigger" onclick="triggerEmergency()" disabled>Activate Emergency Override</button>
+
+                    <div class="info-box">
+                        <strong>Emergency Protocol</strong>
+                        <ul>
+                            <li>Selected road gets immediate green light</li>
+                            <li>All other roads to red immediately</li>
+                            <li>Normal cycle resumes after clearing override</li>
+                            <li>Emergency vehicles have absolute priority</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-strip mt-4">
+                <div class="stat-card">
+                    <div class="stat-label">📈 Total Processed</div>
+                    <div class="stat-value" id="stat-total">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">⏱ Average Wait Time</div>
+                    <div class="stat-value" id="stat-wait">0s</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">📊 Throughput</div>
+                    <div class="stat-value"><span id="stat-tput">0</span><span style="font-size: 1rem; color: var(--text-muted);"> /min</span></div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">⚡ Efficiency</div>
+                    <div class="stat-value text-green" id="stat-eff">0%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAGE 2: ANALYTICS -->
+        <div id="page-analytics" class="page">
+            
+            <div class="stats-strip mb-4">
+                <div class="stat-card"><div class="stat-label">📈 Total Processed</div><div class="stat-value" id="stat-total-a">0</div></div>
+                <div class="stat-card"><div class="stat-label">⏱ Average Wait Time</div><div class="stat-value" id="stat-wait-a">0s</div></div>
+                <div class="stat-card"><div class="stat-label">📊 Throughput</div><div class="stat-value"><span id="stat-tput-a">0</span><span style="font-size: 1rem; color: var(--text-muted);"> /min</span></div></div>
+                <div class="stat-card"><div class="stat-label">⚡ Efficiency</div><div class="stat-value text-green" id="stat-eff-a">0%</div></div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Vehicle Throughput Analysis</div>
+                        <div class="card-subtitle">Real-time traffic flow across all intersections</div>
+                    </div>
+                    <div class="speed-group">
+                        <button class="btn active">1 Hour</button>
+                        <button class="btn">4 Hours</button>
+                        <button class="btn">1 Day</button>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="throughputChart"></canvas>
+                </div>
+                <div class="summary-row">
+                    <div class="sum-item"><div class="sum-lbl">Peak Hour</div><div class="sum-val">17:30</div></div>
+                    <div class="sum-item"><div class="sum-lbl">Avg Throughput</div><div class="sum-val">42 veh/min</div></div>
+                    <div class="sum-item"><div class="sum-lbl">Total Vehicles</div><div class="sum-val" id="chart-tot">0</div></div>
+                    <div class="sum-item"><div class="sum-lbl">Efficiency</div><div class="sum-val text-green" id="chart-eff">0%</div></div>
+                </div>
+            </div>
+
+            <div class="two-col mt-4">
+                <div class="card">
+                    <div class="card-header" style="flex-direction: column; align-items: flex-start;">
+                        <div class="card-title mb-4">Export Analytics Data</div>
+                        <div class="card-subtitle mb-4">Download comprehensive reports</div>
+                    </div>
+                    
+                    <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Export Format:</div>
+                    <div class="export-grid">
+                        <button class="btn active" style="border-color: var(--primary); color: var(--primary);">PDF Report</button>
+                        <button class="btn">Excel Spreadsheet</button>
+                        <button class="btn">CSV Data</button>
+                        <button class="btn">JSON Export</button>
+                    </div>
+
+                    <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Include Data (4/4 selected):</div>
+                    <div class="checklist">
+                        <label class="check-item"><input type="checkbox" checked> Throughput Charts</label>
+                        <label class="check-item"><input type="checkbox" checked> Performance Statistics</label>
+                        <label class="check-item"><input type="checkbox" checked> All Insights</label>
+                        <label class="check-item"><input type="checkbox" checked> Chart Images</label>
+                    </div>
+
+                    <div style="font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Date Range:</div>
+                    <div class="speed-group mb-4">
+                        <button class="btn active" style="border-color: var(--primary); color: var(--primary);">Today Only</button>
+                        <button class="btn">Past Week</button>
+                        <button class="btn">Past Month</button>
+                    </div>
+
+                    <div class="info-box mb-4 text-center">Export Summary: PDF / Today / ~2.4MB</div>
+                    <button class="btn-activate-emerg" style="background: var(--primary); margin: 0; width: 100%;">⬇ Export Data</button>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Detailed Statistics</div>
+                        <div class="speed-group">
+                            <button class="btn active">All Metrics</button>
+                            <button class="btn">Performance</button>
+                        </div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Road</th>
+                                <th>Avg Wait</th>
+                                <th>Queue Size</th>
+                                <th>Total processed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><span style="color:#60a5fa">●</span> Road A (North)</td><td>68s</td><td><span id="t-q-A">12</span></td><td>342</td></tr>
+                            <tr><td><span style="color:#facc15">●</span> Road B (East)</td><td>82s</td><td><span id="t-q-B">18</span></td><td>415</td></tr>
+                            <tr><td><span style="color:#f87171">●</span> Road C (South)</td><td>55s</td><td><span id="t-q-C">8</span></td><td>290</td></tr>
+                            <tr><td><span style="color:#c084fc">●</span> Road D (West)</td><td>71s</td><td><span id="t-q-D">15</span></td><td>365</td></tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                        <strong>Overall System Performance:</strong>
+                        <div class="flex-between mt-4">
+                            <div>Avg Wait Time: <br><b id="tbl-wait">72.5s</b></div>
+                            <div>Overall Efficiency: <br><b class="text-green" id="tbl-eff">82%</b></div>
+                            <div>Total Throughput: <br><b id="tbl-tot">1,412</b></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">Performance Insights & Recommendations</div>
+                        <div class="card-subtitle">AI-powered analysis and optimization suggestions</div>
+                    </div>
+                    <div>
+                        <button class="btn" style="border-color: var(--primary); color: var(--primary);">✨ Generate Report</button>
+                    </div>
+                </div>
+                
+                <div class="speed-group" style="justify-content: flex-start; margin-bottom: 1rem;">
+                    <button class="btn active">💡 Optimization</button>
+                    <button class="btn text-red" style="border-color: transparent;">⚠ Bottlenecks</button>
+                    <button class="btn text-warning" style="border-color: transparent;">⚠ Emergency</button>
+                </div>
+
+                <div class="two-col" style="grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+                    <div class="rec-card">
+                        <div class="rec-header">
+                            💡 Signal Timing 
+                            <span class="badge badge-red">HIGH • Road B</span>
+                        </div>
+                        <div class="rec-desc">Extended red times detected during peak hours leading to excessive queue build-up.</div>
+                        <div style="font-size: 0.8rem; font-weight: 600;">Recommendation:</div>
+                        <div class="rec-desc text-main mb-4">Increase green light duration by 15 seconds during 14:30–19:30.</div>
+                        <div class="rec-result">📈 +12% efficiency improvement</div>
+                        <button class="btn w-full">Apply</button>
+                    </div>
+                    <div class="rec-card">
+                        <div class="rec-header">
+                            💡 Adaptive Timing 
+                            <span class="badge badge-yellow">MED • Road A</span>
+                        </div>
+                        <div class="rec-desc">Underutilized green time observed during off-peak hours, delaying others.</div>
+                        <div style="font-size: 0.8rem; font-weight: 600;">Recommendation:</div>
+                        <div class="rec-desc text-main mb-4">Implement adaptive timing based on vehicle detection and presence.</div>
+                        <div class="rec-result text-green">📈 +8% overall throughput</div>
+                        <button class="btn w-full">Apply</button>
+                    </div>
+                    <div class="rec-card">
+                        <div class="rec-header">
+                            💡 Emergency System 
+                            <span class="badge badge-red">HIGH • Road D</span>
+                        </div>
+                        <div class="rec-desc">Frequent emergency vehicle conflicts causing gridlock recovery delays.</div>
+                        <div style="font-size: 0.8rem; font-weight: 600;">Recommendation:</div>
+                        <div class="rec-desc text-main mb-4">Install advanced emergency vehicle detection system for Road D.</div>
+                        <div class="rec-result text-blue">📉 -25% emergency response delay</div>
+                        <button class="btn w-full">Apply</button>
+                    </div>
+                </div>
+                <div class="flex-between mt-4" style="background: var(--bg-color); padding: 15px; border-radius: 8px;">
+                    <div class="text-green font-bold" style="font-size: 1.1rem;">+18.5% Potential Efficiency Gain</div>
+                    <div class="text-blue font-bold" style="font-size: 1.1rem;">12.3s Estimated Time Savings</div>
+                    <div style="color: purple; font-weight: bold; background: #e9d5ff; padding: 4px 12px; border-radius: 12px;">High Implementation Priority</div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        ⚡ Analytics Information<br>
+        Data collected from real-time traffic simulation • <span id="footer-time">Updated every 24 seconds</span><br>
+        © 2026 Smart Traffic Simulator
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // DOM Elements
+        const elements = {
+            tputChart: document.getElementById('throughputChart'),
+            lights: {
+                A: { r: document.getElementById('light-A-r'), y: document.getElementById('light-A-y'), g: document.getElementById('light-A-g') },
+                B: { r: document.getElementById('light-B-r'), y: document.getElementById('light-B-y'), g: document.getElementById('light-B-g') },
+                C: { r: document.getElementById('light-C-r'), y: document.getElementById('light-C-y'), g: document.getElementById('light-C-g') },
+                D: { r: document.getElementById('light-D-r'), y: document.getElementById('light-D-y'), g: document.getElementById('light-D-g') }
+            },
+            badges: {
+                A: document.getElementById('badge-A'), B: document.getElementById('badge-B'), C: document.getElementById('badge-C'), D: document.getElementById('badge-D')
+            },
+            queues: {
+                A: document.getElementById('q-A'), B: document.getElementById('q-B'), C: document.getElementById('q-C'), D: document.getElementById('q-D')
+            },
+            qbars: {
+                A: document.getElementById('qbar-A'), B: document.getElementById('qbar-B'), C: document.getElementById('qbar-C'), D: document.getElementById('qbar-D')
+            },
+            veh: {
+                A: document.getElementById('veh-A'), B: document.getElementById('veh-B'), C: document.getElementById('veh-C'), D: document.getElementById('veh-D')
+            },
+            cams: {
+                A: document.getElementById('cam-A'), B: document.getElementById('cam-B'), C: document.getElementById('cam-C'), D: document.getElementById('cam-D')
+            },
+            stats: {
+                total: document.getElementById('stat-total'),
+                wait: document.getElementById('stat-wait'),
+                tput: document.getElementById('stat-tput'),
+                eff: document.getElementById('stat-eff'),
+                totala: document.getElementById('stat-total-a'),
+                waita: document.getElementById('stat-wait-a'),
+                tputa: document.getElementById('stat-tput-a'),
+                effa: document.getElementById('stat-eff-a')
+            }
+        };
+
+        // State populated by WebSocket
+        let state = null;
+        let ws = null;
+        let chartInstance = null;
+        let carSims = {}; // Store car tracking
+
+        // --- WebSocket Connection ---
+        function initWebSocket() {
+            ws = new WebSocket("ws://localhost:8000/ws");
+            
+            ws.onmessage = (event) => {
+                const msg = JSON.parse(event.data);
+                if (msg.type === "SIM_STATE") {
+                    state = msg.data;
+                    syncUIReflectingState();
+                }
+            };
+            
+            ws.onclose = () => {
+                console.log("WebSocket connection closed. Retrying in 2s...");
+                document.getElementById('status-label').innerText = 'Disconnected! Reconnecting...';
+                document.getElementById('status-label').style.color = 'var(--danger)';
+                setTimeout(initWebSocket, 2000);
+            };
+            
+            ws.onopen = () => {
+                console.log("Connected to AI Backend");
+            };
+        }
+
+        function wsSend(action, payload={}) {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ action: action, payload: payload }));
+            }
+        }
+
+        // --- Page Routing & Theme ---
+        function switchPage(pageStr) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-right .btn:not(.btn-icon)').forEach(b => b.classList.remove('active'));
+            document.getElementById(`page-${pageStr}`).classList.add('active');
+            if(pageStr === 'dashboard') document.getElementById('btn-nav-dash').classList.add('active');
+            else document.getElementById('btn-nav-ana').classList.add('active');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const btn = document.getElementById('btn-theme');
+            btn.innerText = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            Chart.defaults.color = document.body.classList.contains('dark-mode') ? '#94a3b8' : '#6b7280';
+            Chart.defaults.borderColor = document.body.classList.contains('dark-mode') ? '#334155' : '#e5e7eb';
+            if(chartInstance) chartInstance.update();
+        }
+
+        // --- Commands sent to Backend ---
+        function toggleAI() { wsSend("TOGGLE_AI"); }
+        function togglePause() { wsSend("TOGGLE_PAUSE"); }
+        function resetSim() { wsSend("RESET_SIM"); }
+        function setSpeed(sp, btnElement) { 
+            document.querySelectorAll('.speed-group .btn').forEach(b => b.classList.remove('active'));
+            if(btnElement) btnElement.classList.add('active');
+            wsSend("SET_SPEED", { speed: sp }); 
+        }
+
+        // Emergency Override Commands
+        let selectedEmRoad = null;
+        let selectedEmType = null;
+        
+        // Expose functions globally for element interaction
+        window.switchPage = switchPage;
+        window.toggleTheme = toggleTheme;
+        window.toggleAI = toggleAI;
+        window.togglePause = togglePause;
+        window.resetSim = resetSim;
+        window.setSpeed = setSpeed;
+        
+        window.selectEmRoad = function(rd) {
+            selectedEmRoad = rd;
+            document.querySelectorAll('#em-roads .emerg-card').forEach(c => c.classList.remove('selected'));
+            event.target.classList.add('selected');
+            checkEmReady();
+        }
+        window.selectEmType = function(type) {
+            selectedEmType = type;
+            document.querySelectorAll('#em-types .emerg-card').forEach(c => c.classList.remove('selected'));
+            event.target.classList.add('selected');
+            checkEmReady();
+        }
+        function checkEmReady() {
+            if(!state) return;
+            const btn = document.getElementById('btn-em-trigger');
+            if(selectedEmRoad && selectedEmType && !state.emergencyActive) {
+                btn.disabled = false;
+            }
+        }
+        window.triggerEmergency = function() {
+            if(state && state.emergencyActive) { wsSend("CANCEL_EMERGENCY"); return; }
+            wsSend("TRIGGER_EMERGENCY", { road: selectedEmRoad });
+        }
+
+
+        // --- Core Visual Updates Driven by Backend State ---
+        function setLight(road, colorStr) {
+            const l = elements.lights[road];
+            l.r.classList.remove('active'); l.y.classList.remove('active'); l.g.classList.remove('active');
+            l[colorStr].classList.add('active');
+            
+            const b = elements.badges[road];
+            b.classList.remove('badge-red', 'badge-yellow', 'badge-green');
+            if(colorStr==='r') { b.innerText = 'RED'; b.classList.add('badge-red'); }
+            if(colorStr==='y') { b.innerText = 'YELLOW'; b.classList.add('badge-yellow'); }
+            if(colorStr==='g') { b.innerText = 'GREEN'; b.classList.add('badge-green'); }
+        }
+
+        function simulateCars(roadId) {
+            if(!state) return;
+            const cam = elements.cams[roadId];
+            if(Math.random() > 0.4 && state.aiActive && !state.isPaused) {
+                const car = document.createElement('div');
+                car.className = 'car';
+                car.style.background = `hsl(${Math.random()*360}, 70%, 50%)`;
+                
+                if(roadId==='A' || roadId==='C') {
+                    car.classList.add('ns');
+                    car.style.left = (Math.random()*80 + 10) + '%';
+                    car.style.top = '-20px';
+                    cam.appendChild(car);
+                    let pos = -20;
+                    let inter = setInterval(() => {
+                        if(!state || state.isPaused) return;
+                        pos += 2 * state.speed;
+                        car.style.top = pos + 'px';
+                        if(pos > 60) { clearInterval(inter); car.remove(); }
+                    }, 50);
+                } else {
+                    car.classList.add('ew');
+                    car.style.top = (Math.random()*40 + 10) + 'px';
+                    car.style.left = '-20px';
+                    cam.appendChild(car);
+                    let pos = -20;
+                    let inter = setInterval(() => {
+                        if(!state || state.isPaused) return;
+                        pos += 2 * state.speed;
+                        car.style.left = pos + 'px';
+                        if(pos > cam.clientWidth) { clearInterval(inter); car.remove(); }
+                    }, 50);
+                }
+            }
+        }
+
+        // Sync entirely from Backend State
+        function syncUIReflectingState() {
+            if(!state) return;
+
+            // 1. Controls Sync
+            const btnAi = document.getElementById('btn-ai-toggle');
+            if(state.aiActive) {
+                btnAi.classList.remove('off'); btnAi.innerHTML = '🎥 AI Detection ON';
+            } else {
+                btnAi.classList.add('off'); btnAi.innerHTML = '🎥 AI Detection OFF';
+            }
+
+            const btnPause = document.getElementById('btn-pause');
+            const lblStatus = document.getElementById('status-label');
+            if(state.isPaused) {
+                btnPause.innerHTML = 'Resume ▶'; btnPause.style.background = 'var(--primary-light)'; btnPause.style.color = 'var(--primary)';
+                lblStatus.innerText = 'Paused'; lblStatus.style.color = 'var(--warning)';
+            } else {
+                btnPause.innerHTML = 'Pause ⏸'; btnPause.style.background = 'var(--secondary-light)'; btnPause.style.color = 'var(--secondary)';
+                lblStatus.innerText = 'Running'; lblStatus.style.color = 'var(--primary)';
+            }
+
+            document.getElementById('speed-label').innerText = `Speed: ${state.speed}x`;
+            document.getElementById('cycles-label').innerText = `Cycles: ${state.cycles}`;
+
+            // 2. Emergency Override Sync
+            const btnEm = document.getElementById('btn-em-trigger');
+            const emBanner = document.getElementById('em-banner');
+            if(state.emergencyActive) {
+                btnEm.innerHTML = `🔴 Emergency Active (${state.emergencyRoad}) — Cancel`;
+                btnEm.style.animation = 'pulse 1s infinite alternate';
+                btnEm.disabled = false;
+                emBanner.style.display = 'block';
+            } else {
+                btnEm.innerHTML = 'Activate Emergency Override';
+                btnEm.style.animation = 'none';
+                btnEm.disabled = !(selectedEmRoad && selectedEmType);
+                emBanner.style.display = 'none';
+            }
+
+            // 3. Traffic Lights Sync
+            const activeR = state.emergencyActive ? state.emergencyRoad : state.roads[state.activeRoadIdx];
+            for (let r of state.roads) {
+                if (state.emergencyActive) {
+                    setLight(r, r === state.emergencyRoad ? 'g' : 'r');
+                } else {
+                    setLight(r, r === activeR ? 'g' : 'r');
+                }
+            }
+
+            // 4. Queues & Badges
+            for(let r of state.roads) {
+                elements.queues[r].innerText = state.queues[r];
+                elements.veh[r].innerText = state.queues[r] + Math.floor(Math.random()*(r===activeR?10:2));
+                
+                let pct = (state.queues[r] / 50) * 100;
+                if(pct>100) pct=100;
+                elements.qbars[r].style.width = pct + '%';
+                if(pct < 30) elements.qbars[r].style.background = 'var(--primary)';
+                else if(pct < 70) elements.qbars[r].style.background = 'var(--warning)';
+                else elements.qbars[r].style.background = 'var(--danger)';
+
+                let spd = 20 + Math.random()*20;
+                if(r === activeR) spd += 20; 
+                if(state.queues[r] > 30 && r !== activeR) spd = 0;
+                if(document.getElementById(`spd-${r}`)) document.getElementById(`spd-${r}`).innerText = spd.toFixed(1);
+                if(document.getElementById(`t-q-${r}`)) document.getElementById(`t-q-${r}`).innerText = state.queues[r];
+                
+                // Add cars every tick
+                simulateCars(r);
+            }
+
+            // 5. Global Stats
+            let waitTime = 60 + Math.floor(Math.random()*20); // Dummy for UX
+            let efficiency = 75 + Math.floor(Math.random()*15); // Dummy for UX
+
+            let sTotStr = state.totalProcessed.toLocaleString();
+            elements.stats.total.innerText = sTotStr; elements.stats.totala.innerText = sTotStr;
+            elements.stats.wait.innerText = waitTime + 's'; elements.stats.waita.innerText = waitTime + 's';
+            elements.stats.tput.innerText = state.throughput; elements.stats.tputa.innerText = state.throughput;
+            elements.stats.eff.innerText = efficiency + '%'; elements.stats.effa.innerText = efficiency + '%';
+
+            document.getElementById('tbl-wait').innerText = waitTime + 's';
+            document.getElementById('tbl-eff').innerText = efficiency + '%';
+            document.getElementById('tbl-tot').innerText = sTotStr;
+            document.getElementById('chart-tot').innerText = sTotStr;
+            document.getElementById('chart-eff').innerText = efficiency + '%';
+
+            const timeStr = new Date().toLocaleTimeString();
+            document.getElementById('last-updated').innerText = `● Stop ● Caution ● Go | From Backend: ${timeStr}`;
+            document.getElementById('footer-time').innerText = `Updated at ${timeStr} (Server Ticks: ${state.simTime})`;
+
+            // 6. Chart update
+            updateChartFromServer();
+        }
+
+        // --- Chart.js ---
+        function initChart() {
+            const ctx = elements.tputChart.getContext('2d');
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({length: 12}, (_, i) => `T-${12-i}`),
+                    datasets: [
+                        { label: 'Road A', data: [], borderColor: '#60a5fa', tension: 0.4, borderWidth: 2, pointRadius: 0 },
+                        { label: 'Road B', data: [], borderColor: '#facc15', tension: 0.4, borderWidth: 2, pointRadius: 0 },
+                        { label: 'Road C', data: [], borderColor: '#f87171', tension: 0.4, borderWidth: 2, pointRadius: 0 },
+                        { label: 'Road D', data: [], borderColor: '#c084fc', tension: 0.4, borderWidth: 2, pointRadius: 0 }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, animation: { duration: 0 },
+                    scales: { y: { min: 0, max: 60, grid: { color: 'rgba(150, 150, 150, 0.1)' } }, x: { grid: { display: false } } },
+                    plugins: { legend: { labels: { color: '#94a3b8' } }, tooltip: { mode: 'index', intersect: false } },
+                    interaction: { mode: 'nearest', axis: 'x', intersect: false }
+                }
+            });
+            Chart.defaults.color = document.body.classList.contains('dark-mode') ? '#94a3b8' : '#6b7280';
+            Chart.defaults.borderColor = document.body.classList.contains('dark-mode') ? '#334155' : '#e5e7eb';
+        }
+
+        function updateChartFromServer() {
+            if(!chartInstance || !state || !state.chartData) return;
+            chartInstance.data.datasets[0].data = state.chartData['A'];
+            chartInstance.data.datasets[1].data = state.chartData['B'];
+            chartInstance.data.datasets[2].data = state.chartData['C'];
+            chartInstance.data.datasets[3].data = state.chartData['D'];
+            chartInstance.update();
+        }
+
+        // --- Bootstrap ---
+        window.onload = () => {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('btn-theme').innerText = '☀️';
+            }
+            initChart();
+            initWebSocket();
+        };
+
+    </script>
+</body>
+</html>
